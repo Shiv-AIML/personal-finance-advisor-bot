@@ -1,0 +1,9 @@
+body { background: #f6f8fb; }
+.hero { background: white; border: 1px solid #e7eaf0; }
+.card, .stat-card { border: 0; box-shadow: 0 4px 18px rgba(0,0,0,.06); }
+.stat-card { background: white; border-radius: 14px; padding: 20px; }
+.stat-card span { display:block; color:#6c757d; margin-bottom:8px; }
+.stat-card strong { font-size:1.45rem; }
+.auth-card { max-width: 460px; margin-top: 5vh; }
+.advice-box { white-space: pre-wrap; line-height: 1.7; background:#f8f9fa; padding:20px; border-radius:12px; }
+.report-card { max-width: 900px; margin: auto; }

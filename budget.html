@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Budget{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-4"><div class="card"><div class="card-body">
+    <h4>Set Monthly Budget</h4><p class="text-muted">{{ month }}</p>
+    <form method="post">
+      <label class="form-label">Category</label><select class="form-select mb-3" name="category">{% for c in categories %}<option>{{ c }}</option>{% endfor %}</select>
+      <label class="form-label">Limit (₹)</label><input class="form-control mb-3" type="number" step="0.01" min="0.01" name="limit_amount" required>
+      <button class="btn btn-primary w-100">Save Budget</button>
+    </form>
+  </div></div></div>
+  <div class="col-lg-8"><div class="card"><div class="card-body">
+    <h4>Budget vs Actual</h4>
+    <div class="table-responsive"><table class="table">
+      <thead><tr><th>Category</th><th>Budget</th><th>Spent</th><th>Remaining</th><th>Status</th></tr></thead>
+      <tbody>{% for b in budgets %}<tr><td>{{ b.category }}</td><td>₹{{ "%.2f"|format(b.limit) }}</td><td>₹{{ "%.2f"|format(b.spent) }}</td><td>₹{{ "%.2f"|format(b.remaining) }}</td><td>{% if b.over %}<span class="badge bg-danger">Over budget</span>{% else %}<span class="badge bg-success">Within budget</span>{% endif %}</td></tr>{% else %}<tr><td colspan="5">No budgets yet.</td></tr>{% endfor %}</tbody>
+    </table></div>
+  </div></div></div>
+</div>
+{% endblock %}
