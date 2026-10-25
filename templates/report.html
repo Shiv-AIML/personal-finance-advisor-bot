@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Monthly Report{% endblock %}
+{% block content %}
+<div class="card report-card">
+  <div class="card-body p-4">
+    <h1>Monthly Financial Report</h1>
+    <p class="text-muted">{{ summary.month }}</p>
+    <hr>
+    <div class="row g-3">
+      <div class="col-md-4"><h6>Total Income</h6><h3>₹{{ "%.2f"|format(summary.income) }}</h3></div>
+      <div class="col-md-4"><h6>Total Expenses</h6><h3>₹{{ "%.2f"|format(summary.expenses) }}</h3></div>
+      <div class="col-md-4"><h6>Total Savings</h6><h3>₹{{ "%.2f"|format(summary.savings) }}</h3></div>
+    </div>
+    <hr>
+    <h5>Savings Rate</h5>
+    <p class="display-6">{{ summary.savings_rate }}%</p>
+    <h5>Category Spending</h5>
+    <ul>{% for category, amount in summary.categories.items() %}<li>{{ category }} — ₹{{ "%.2f"|format(amount) }}</li>{% else %}<li>No expenses recorded.</li>{% endfor %}</ul>
+    <div class="alert alert-warning mt-4">This report is for educational/demo purposes and is not professional financial advice.</div>
+  </div>
+</div>
+{% endblock %}

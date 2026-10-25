@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}AI Advisor{% endblock %}
+{% block content %}
+<div class="card mb-4"><div class="card-body">
+  <h2>🤖 AI Financial Advisor</h2>
+  <p class="text-muted">The AI receives your current-month totals and category spending and generates educational suggestions.</p>
+  <form method="post"><button class="btn btn-primary">Generate AI Advice</button></form>
+</div></div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="stat-card"><span>Income</span><strong>₹{{ "%.2f"|format(summary.income) }}</strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><span>Expenses</span><strong>₹{{ "%.2f"|format(summary.expenses) }}</strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><span>Savings</span><strong>₹{{ "%.2f"|format(summary.savings) }}</strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><span>Savings Rate</span><strong>{{ summary.savings_rate }}%</strong></div></div>
+</div>
+
+{% if advice %}
+<div class="card"><div class="card-body">
+  <h4>Advisor Response</h4>
+  <div class="advice-box">{{ advice }}</div>
+</div></div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h2>Welcome, {{ current_user.name }} 👋</h2><p class="text-muted mb-0">{{ summary.month }}</p></div>
+  <a class="btn btn-outline-primary" href="{{ url_for('advisor') }}">🤖 Ask AI Advisor</a>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="stat-card"><span>Income</span><strong>₹{{ "%.2f"|format(summary.income) }}</strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><span>Expenses</span><strong>₹{{ "%.2f"|format(summary.expenses) }}</strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><span>Savings</span><strong>₹{{ "%.2f"|format(summary.savings) }}</strong></div></div>
+  <div class="col-md-3"><div class="stat-card"><span>Savings Rate</span><strong>{{ summary.savings_rate }}%</strong></div></div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-6"><div class="card"><div class="card-body"><h5>Expense Breakdown</h5><canvas id="expenseChart"></canvas></div></div></div>
+  <div class="col-lg-6"><div class="card"><div class="card-body"><h5>Recent Expenses</h5>
+    {% if recent_expenses %}
+    <div class="table-responsive"><table class="table">
+      <thead><tr><th>Date</th><th>Category</th><th>Amount</th></tr></thead>
+      <tbody>{% for e in recent_expenses %}<tr><td>{{ e.entry_date }}</td><td>{{ e.category }}</td><td>₹{{ "%.2f"|format(e.amount) }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    {% else %}<p class="text-muted">No expenses yet. Add your first expense.</p>{% endif %}
+  </div></div></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const labels = {{ summary.categories.keys()|list|tojson }};
+const values = {{ summary.categories.values()|list|tojson }};
+new Chart(document.getElementById('expenseChart'), {
+  type: 'doughnut',
+  data: { labels: labels, datasets: [{ data: values }] },
+  options: { responsive: true }
+});
+</script>
+{% endblock %}

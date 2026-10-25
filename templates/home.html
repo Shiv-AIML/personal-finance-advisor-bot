@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Personal Finance Advisor{% endblock %}
+{% block content %}
+<div class="hero p-5 rounded-4">
+  <div class="row align-items-center">
+    <div class="col-lg-8">
+      <h1 class="display-5 fw-bold">Personal Finance Advisor Bot</h1>
+      <p class="lead">Track income, control expenses, create budgets and get AI-powered educational insights.</p>
+      <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-2">Get Started</a>
+      <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">Login</a>
+    </div>
+    <div class="col-lg-4 text-center fs-1">📊 💰 🤖</div>
+  </div>
+</div>
+<div class="row g-3 mt-4">
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Track</h5><p>Record income and expenses by category.</p></div></div></div>
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Plan</h5><p>Set monthly category budgets and monitor them.</p></div></div></div>
+  <div class="col-md-4"><div class="card h-100"><div class="card-body"><h5>Analyze</h5><p>View charts and request AI-generated educational insights.</p></div></div></div>
+</div>
+{% endblock %}
